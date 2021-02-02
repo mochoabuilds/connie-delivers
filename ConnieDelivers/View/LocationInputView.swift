@@ -1,0 +1,135 @@
+//
+//  LocationInputView.swift
+//  ConnieDelivers
+//
+//  Created by M. Ochoa on 1/31/21.
+//
+
+import UIKit
+
+protocol LocationInputViewDelegate: class {
+    func dismissLocationInputView()
+}
+
+class LocationInputView: UIView {
+
+    // MARK: - Properties
+    
+    weak var delegate: LocationInputViewDelegate?
+    
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage( #imageLiteral(resourceName: "baseline_arrow_back_black_36dp-1").withRenderingMode(.alwaysOriginal),
+        for: .normal)
+        button.addTarget(self, action:
+        #selector(handleBackTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Guest Nombre"
+        label.textColor = .darkGray
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    // Input 1 Stylings
+    private let startLocationIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        return view
+    }()
+
+   // Input 2 Stylings
+    private let destinationIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
+    
+    private lazy var startingLocationTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "YOUR LOCATION"
+        tf.backgroundColor = .groupTableViewBackground
+        tf.isEnabled = false
+        tf.font = UIFont.systemFont(ofSize: 16)
+        
+        let paddingView = UIView()
+        paddingView.setDimensions(height: 30, width: 8)
+        tf.leftView = paddingView
+        tf.leftViewMode = .always
+        
+        return tf
+    }()
+    
+    private lazy var destinationLocationTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "CALL KORNER STORE TO..."
+        tf.backgroundColor = .groupTableViewBackground
+        tf.returnKeyType = .search
+        tf.font = UIFont.systemFont(ofSize: 16)
+        tf.isEnabled = false
+        
+        let paddingView = UIView()
+        paddingView.setDimensions(height: 30, width: 8)
+        tf.leftView = paddingView
+        tf.leftViewMode = .always
+        
+        return tf
+    }()
+    
+    // MARK: - Lifecycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addShadow()
+        
+        backgroundColor = .white
+        
+        addSubview(backButton)
+        backButton.anchor(top: topAnchor, left: leftAnchor, paddingTop: 44,
+                          paddingLeft: 12, width: 24, height: 25)
+        
+        // Centering Title Label
+        addSubview(titleLabel)
+        titleLabel.centerY(inView: backButton)
+        titleLabel.centerX(inView: self)
+        
+        
+        addSubview(startingLocationTextField)
+        startingLocationTextField.anchor(top: backButton.bottomAnchor, left: leftAnchor,
+                                         right: rightAnchor, paddingTop: 4, paddingLeft: 40,
+                                         paddingRight: 40, height: 30)
+        
+        addSubview(destinationLocationTextField)
+        destinationLocationTextField.anchor(top: startingLocationTextField.bottomAnchor,
+                                            left: leftAnchor, right: rightAnchor,
+                                            paddingTop: 12, paddingLeft: 40, paddingRight: 40, height: 30)
+        
+        addSubview(startLocationIndicatorView)
+        startLocationIndicatorView.centerY(inView: startingLocationTextField,
+                                           leftAnchor: leftAnchor, paddingLeft: 20)
+        startLocationIndicatorView.setDimensions(height: 6, width: 6)
+        startLocationIndicatorView.layer.cornerRadius = 6 / 2
+        
+        
+        addSubview(destinationIndicatorView)
+        destinationIndicatorView.centerY(inView: destinationLocationTextField,
+                                           leftAnchor: leftAnchor, paddingLeft: 20)
+        destinationIndicatorView.setDimensions(height: 6, width: 6)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func handleBackTapped() {
+        delegate?.dismissLocationInputView()
+    }
+    
+}
