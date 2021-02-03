@@ -22,6 +22,10 @@ class HomeController: UIViewController {
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
     
+    private var user: User? {
+        didSet { locationInputView.user = user }
+    }
+    
     private final let locationInputViewHeight: CGFloat  = 200
     
     // MARK: - Lifecycle
@@ -29,12 +33,19 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
-//        enableLocationServices()
-        signOut()
+        enableLocationServices()
+        fetchUserData()
+//        signOut()
     }
     
     // MARK: - API
-
+    
+    func fetchUserData() {
+        Service.shared.fetchUserData { user in
+            self.user = user
+        }
+    }
+    
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
             DispatchQueue.main.async {
@@ -42,7 +53,6 @@ class HomeController: UIViewController {
                 self.present(nav, animated: true, completion: nil)
             }
         } else {
-            // Once Login Successful, Call Function to Configure UI
            configureUI()
         }
     }
@@ -182,7 +192,7 @@ extension HomeController: LocationInputViewDelegate {
 
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Favorites"
+        return "Test"
     }
     
     
@@ -194,6 +204,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         return section == 0 ? 2 : 5
     }
     
+    //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as!
             LocationCell
