@@ -25,9 +25,9 @@
 * Animating Tableview  :white_check_mark:
 * Location Tableview Cell  :white_check_mark:
 
-* Fetching Guest Data
-* Set Full Name Label with Guest Info
-* Create Custom Guest Object
+* Fetching Guest Data :white_check_mark:
+* Set Full Name Label with Guest Info :white_check_mark:
+* Create Custom Guest Object :white_check_mark:
 * Register Corner Store & Upload Location
 * Fetch Corner Store from Database
 * Display Corner Store on Map
