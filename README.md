@@ -1,6 +1,6 @@
 ## KORNER STORE aka ConnieDelivers.com
 
-* iOS app -- Quickly call the corner store to your curb and mingle on cool shaded streets with us 
+* iOS app -- Quickly call the corner store to your curb and mingle on cool shaded streets and encourage human connection
 
 ## Feature List
 
@@ -28,10 +28,10 @@
 * Fetching Guest Data :white_check_mark:
 * Set Full Name Label with Guest Info :white_check_mark:
 * Create Custom Guest Object :white_check_mark:
-* Register Corner Store & Upload Location
-* Fetch Corner Store from Database
-* Display Corner Store on Map
-* Render Customer Corner Store Annotation
+* Register Corner Store & Upload Location :white_check_mark:
+* Fetch Corner Store from Database :white_check_mark:
+* Display Corner Store on Map :white_check_mark:
+* Render Customer Corner Store Annotation :white_check_mark:
 * Update Corner Store Position in Real-Time
 
 * Log In/Sign Up
