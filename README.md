@@ -32,12 +32,11 @@
 * Fetch Corner Store from Database :white_check_mark:
 * Display Corner Store on Map :white_check_mark:
 * Render Customer Corner Store Annotation :white_check_mark:
-* Update Corner Store Position in Real-Time
+* Update Corner Store Position in Real-Time :white_check_mark:
 
-* Log In/Sign Up
-* Searching for Delivery Locations
-* Population Cells with Location Data
-* Selecting & Displaying Location
+* Searching for Delivery Locations :white_check_mark:
+* Population Cells with Location Data :white_check_mark:
+* Selecting & Displaying Location :white_check_mark:
 * Configuring Action Button for Side Menu
 * Removing Annotation (Refactoring)
 * Adding/Removing Delivery Location to Destination
