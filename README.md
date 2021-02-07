@@ -1,6 +1,8 @@
 ## KORNER STORE aka ConnieDelivers.com
 
-* iOS app -- Quickly call the corner store to your curb and mingle on cool shaded streets and encourage human connection
+* iOS app -- Quickly call the corner store to your curb and mingle and shop with us
+
+* https://youtu.be/6QsImY_sA9U 
 
 ## Feature List
 
@@ -37,12 +39,12 @@
 * Searching for Delivery Locations :white_check_mark:
 * Population Cells with Location Data :white_check_mark:
 * Selecting & Displaying Location :white_check_mark:
-* Configuring Action Button for Side Menu
-* Removing Annotation (Refactoring)
-* Adding/Removing Delivery Location to Destination
-* Zoom to Fit Relevant Data
+* Configuring Action Button for Side Menu :white_check_mark:
+* Removing Annotation (Refactoring) :white_check_mark:
+* Adding/Removing Delivery Location to Destination :white_check_mark:
+* Zoom to Fit Relevant Data :white_check_mark:
 
-* Setup Guest Ride Action UI 
+* Setup Guest Delivery Action UI 
 * Animating View to Show/Hide
 * Configure Destination Data
 * Zoom to Fit Relevant Data
@@ -66,7 +68,7 @@
 
 * Guest Delivery Cancellation
 * Corner Store Delivery Cancellation
-* Cancel Trip Synposis
+* Cancel Trip Synopsis 
 
 * Update Corner Store Location in Real-Time
 * Create Custom Region Around Delivery
@@ -102,3 +104,4 @@
 * Circular Progress View
 * Adding Animation to Delivery
 * Guest Initials in Side Menu
+* Add Multiple Lanaguage Option
