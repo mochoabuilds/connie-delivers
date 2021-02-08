@@ -134,6 +134,35 @@ extension UITextField {
         tf.isSecureTextEntry = isSecureTextEntry
         tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         return tf
-    }
-    
+    }  
 }
+
+extension MKPlacemark {
+    var address: String? {
+        get {
+            guard let subThoroughfare = subThoroughfare else { return nil }
+            guard let thoroughfare = thoroughfare else { return nil }
+            guard let locality = locality else { return nil }
+            guard let adminArea = administrativeArea else { return nil }
+            
+            return "\(subThoroughfare) \(thoroughfare), \(locality), \(adminArea)"
+        }
+    }
+}
+
+extension MKMapView {
+    func ZoomToFit(annotations: [MKAnnotation]) {
+        var zoomRect = MKMapRect.null
+        
+        annotations.forEach { (annotation) in
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y,
+                                      width: 0.01, height: 0.01)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        // func called because we cannot change zoom view in emerging bottom view
+        let insets = UIEdgeInsets(top: 100, left: 100, bottom: 250, right: 100)
+        setVisibleMapRect(zoomRect, edgePadding: insets, animated: true)
+    }
+}
+
