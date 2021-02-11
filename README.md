@@ -1,7 +1,7 @@
 ## KORNER STORE aka ConnieDelivers.com
 
-* iOS app -- Quickly call the corner store to your curb to shop and mingle
-* https://youtu.be/6QsImY_sA9U 
+* iOS app -- Quickly call the corner store to your curb to mingle and shop
+* https://www.youtube.com/watch?v=OKdkQh2ox3I
 
 ## Feature List
 
@@ -48,26 +48,26 @@
 * Configure Destination Data :white_check_mark:
 * Zoom to Fit Relevant Data :white_check_mark:
 
-* Request Delivery
-* Create Guest Guest Delivery Object
-* Setup Store Side of App
+* Request Delivery :white_check_mark:
+* Create Guest Delivery Object :white_check_mark:
+* Setup Store Side of App :white_check_mark:
 
-* Fetching and Observing Deliveries as Corner Store
-* Delivery Controller UI
-* Adding Delivery Annotation to Map
-* Accept Delivery
+* Fetching and Observing Deliveries as Store :white_check_mark:
+* Delivery Controller UI :white_check_mark:
+* Adding Delivery Annotation to Map :white_check_mark:
+* Accept Delivery as Store :white_check_mark:
 
-* Present Guest Loading View During Korner Store Request
-* Dismiss Loading View After Delivery Accepted
+* Guest View During Korner Store Request :white_check_mark:
+* Dismiss Loading View After Delivery Accepted :white_check_mark:
 
-* Polyline to Delivery Location
-* Passing Store/Guest Data
-* Configure Delivery Action View for Guest
-* Finish Delivery Action View
+* Polyline to Delivery Location :white_check_mark:
+* Passing Store/Guest Data :white_check_mark:
+* Configure Delivery Action View for Guest :white_check_mark:
+* Refactor Delivery Action View :white_check_mark:
 
 * Guest Delivery Cancellation
 * Store Delivery Cancellation
-* Cancel Trip Recap
+* Cancel Delivery Recap
 
 * Update Store Location in Real-Time
 * Create Custom Region Around Delivery
