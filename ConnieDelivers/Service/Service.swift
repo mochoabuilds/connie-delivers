@@ -6,24 +6,92 @@
 //
 
 import Firebase
+import CoreLocation
+import GeoFire
 
 let DB_REF = Database.database().reference()
 let REF_USERS = DB_REF.child("users")
+let REF_DRIVER_LOCATIONS = DB_REF.child("driver-locations")
+let REF_TRIPS = DB_REF.child("trips")
 
 struct Service {
     
     static let shared = Service()
-    let currentUid = Auth.auth().currentUser?.uid
-    
-    func fetchUserData(completion: @escaping(User) -> Void) {
-        REF_USERS.child(currentUid!).observeSingleEvent(of: .value) { (snapshot) in
+ 
+    // allocate email and name, copy into db
+    func fetchUserData(uid: String, completion: @escaping(User) -> Void) {
+        REF_USERS.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
-            let user = User(dictionary: dictionary)
-            
-            print("FIX ME: User email is \(user.email)")
-            print("FIX ME: User fullname is \(user.fullname)")
-        
+            let uid = snapshot.key
+            let user = User(uid: uid, dictionary: dictionary)
             completion(user)
         }
     }
+    
+    // allocate uid and location coordinates, copy into db
+    func fetchDriver(location: CLLocation, completion: @escaping(User) -> Void) {
+        let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+        
+        //  add listener to observe changes in db structure
+        REF_DRIVER_LOCATIONS.observe(.value) { (snapshot) in
+            geofire.query(at: location, withRadius: 50).observe(.keyEntered, with: { (uid, location) in
+                self.fetchUserData(uid: uid, completion: { (user) in
+                    
+                    // mutable copy
+                    var driver = user
+                    driver.location = location
+                    completion(driver)
+                })
+            })
+        }
+    }
+    
+    func uploadTrip (_ pickupCoordinates: CLLocationCoordinate2D,
+        _ destinationCoordinates: CLLocationCoordinate2D,
+        completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        // create array around "korner store requested" coordinates
+        let pickupArray = [pickupCoordinates.latitude, pickupCoordinates.longitude]
+        let destinationArray = [destinationCoordinates.latitude, destinationCoordinates.longitude]
+        
+        let values = ["pickupCoordinates": pickupArray,
+                      "destinationCoordinates": destinationArray,
+                      "state": TripState.requested.rawValue] as [String : Any]
+        
+        REF_TRIPS.child(uid).updateChildValues(values, withCompletionBlock: completion)
+            }
+    
+    // after fetching trip in home controller maintain access to it
+    func observeTrips(completion: @escaping(Trip) -> Void) {
+        REF_TRIPS.observe(.childAdded) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            let uid = snapshot.key
+            let trip = Trip(passengerUid: uid, dictionary: dictionary)
+            completion(trip)
+        }
+    }
+    
+    func acceptTrip(trip: Trip, completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        // using enum helps us easily recall integer value and change state of trip
+        let values = ["driverUid": uid,
+                      "state": TripState.accepted.rawValue] as [String : Any]
+        REF_TRIPS.child(trip.passengerUid).updateChildValues(values, withCompletionBlock: completion)
+    }
+    
+    func observeCurrentTrip(completion: @escaping(Trip) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        REF_TRIPS.child(uid).observe(.value) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            let uid = snapshot.key
+            let trip = Trip(passengerUid: uid, dictionary: dictionary)
+            completion(trip)
+        }
+    }
 }
+
+
+
