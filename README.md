@@ -1,4 +1,4 @@
-## KORNER STORE aka ConnieDelivers.com
+ConnieDelivers.com
 
 * iOS app -- Quickly call the corner store to your curb to mingle and shop
 * https://www.youtube.com/watch?v=OKdkQh2ox3I
