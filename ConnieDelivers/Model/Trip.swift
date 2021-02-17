@@ -12,8 +12,10 @@ import CoreLocation
 // each case has raw values associated with action
 enum TripState: Int {
     case requested
-    case accepted 
+    case accepted
+    case driverArrived
     case inProgress
+    case arrivedAtDestination
     case completed
 }
 
