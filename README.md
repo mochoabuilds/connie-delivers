@@ -1,6 +1,6 @@
 ConnieDelivers.com
 
-* iOS app -- Quickly call the corner store to your curb to mingle and shop
+* iOS app -- Call the corner store to your curb to mingle and shop
 * https://www.youtube.com/watch?v=OKdkQh2ox3I
 
 ## Feature List
@@ -65,22 +65,19 @@ ConnieDelivers.com
 * Configure Delivery Action View for Guest :white_check_mark:
 * Refactor Delivery Action View :white_check_mark:
 
-* Guest Delivery Cancellation
-* Store Delivery Cancellation
-* Cancel Delivery Recap
+* Guest Delivery Cancellation :white_check_mark:
+* Store Delivery Cancellation :white_check_mark:
 
-* Update Store Location in Real-Time
-* Create Custom Region Around Delivery
-* Configure Action View for Delivery
-* Store Arrived UI
-* Active Visit View with Store & Guest
-* Starting a Visit
-* Setup Custom Region for Visit
-* Entering Custom Destination Region
-* Ending a Visit
-* Delete Visit Once Completed
-
-* Refactor Service for Corner Store & Guests
+* Update Store Location in Real-Time :white_check_mark:
+* Create Custom Region Around Delivery :white_check_mark:
+* Configure Action View for Delivery :white_check_mark:
+* Store Arrived UI :white_check_mark:
+* Active Visit View with Store & Guest :white_check_mark:
+* Starting a Visit :white_check_mark:
+* Setup Custom Region for Visit :white_check_mark:
+* Enter Custom Requested Delivery Region :white_check_mark:
+* Ending a Visit :white_check_mark:
+* Delete Visit Once Completed :white_check_mark:
 
 * Side Menu UI
 * Menu Header UI
