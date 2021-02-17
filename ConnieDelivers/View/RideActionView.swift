@@ -8,6 +8,50 @@
 import UIKit
 import MapKit
 
+// uploading request to home controller
+protocol RideActionViewDelegate: class {
+    func uploadTrip(_ view: RideActionView)
+    func cancelTrip()
+    func pickupPassenger()
+    func dropOffPassenger()
+}
+
+enum RideActionViewConfiguration {
+    case requestRide
+    case tripAccepted
+    case driverArrived
+    case pickupPassenger
+    case tripInProgress
+    case endTrip
+    
+    init() {
+        self = .requestRide
+    }
+}
+
+enum ButtonAction: CustomStringConvertible {
+    case requestRide
+    case cancel
+    case getDirections
+    case pickUp
+    case dropOff
+    
+    // setting text button based on enum case
+    var description: String {
+        switch self {
+        case .requestRide: return "CALL CONNIE"
+        case .cancel: return "CANCEL CALL"
+        case .getDirections: return "MEET GUEST"
+        case .pickUp: return "MEET CURBSIDE"
+        case .dropOff: return "DELIVERY COMPLETE"
+        }
+    }
+    
+    init() {
+        self = .requestRide
+    }
+}
+
 class RideActionView: UIView {
 
     // MARK: - Properties
@@ -19,10 +63,19 @@ class RideActionView: UIView {
         }
     }
     
+  
+    var buttonAction = ButtonAction()
+    weak var delegate: RideActionViewDelegate?
+    var user: User?
+    
+    var config = RideActionViewConfiguration() {
+        didSet { configureUI(withConfig: config) }
+    }
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "Test Address"
+      
         label.textAlignment = .center
         return label
     }()
@@ -31,7 +84,7 @@ class RideActionView: UIView {
         let label = UILabel()
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "1000 N Damen, Chicago"
+      
         label.textAlignment = .center
         return label
     }()
@@ -40,22 +93,25 @@ class RideActionView: UIView {
         let view = UIView()
         view.backgroundColor = .black
         
+        view.addSubview(infoViewLabel)
+        infoViewLabel.centerX(inView: view)
+        infoViewLabel.centerY(inView: view)
+
+        return view
+    }()
+    
+    private let infoViewLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30)
         label.textColor = .white
-        label.text = "KS"
-        
-        view.addSubview(label)
-        label.centerX(inView: view)
-        label.centerY(inView: view)
-        
-        return view
+        label.text = "M"
+        return label
     }()
     
     private let kornerStoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "Korner Store"
+        label.text = "Michael Ochoa"
         label.textAlignment = .center
         return label
     }()
@@ -63,7 +119,7 @@ class RideActionView: UIView {
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
-        button.setTitle("REQUEST KORNER STORE", for: .normal)
+        button.setTitle("REQUEST CONNIE", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
@@ -117,7 +173,83 @@ class RideActionView: UIView {
     // MARK: - Selectors
     
     @objc func actionButtonPressed() {
-        print("FIX ME: 123")
+        switch buttonAction {
+            
+        case .requestRide:
+            delegate?.uploadTrip(self)
+        case .cancel:
+            delegate?.cancelTrip()
+        case .getDirections:
+            print("FIX ME: Handle get directions..")
+        case .pickUp:
+            delegate?.pickupPassenger()
+        case .dropOff:
+            delegate?.dropOffPassenger()
+        }
     }
-
+    
+    // MARK: - Helper Functions
+    
+    private func configureUI(withConfig config: RideActionViewConfiguration) {
+        switch config {
+        case .requestRide:
+            buttonAction = .requestRide
+            actionButton.setTitle(buttonAction.description, for: .normal)
+        case .tripAccepted:
+            guard let user = user else { return }
+            
+            if user.accountType == .passenger {
+                titleLabel.text = "En Route To Guest"
+                buttonAction = .getDirections
+                actionButton.setTitle(buttonAction.description, for: .normal)
+            } else {
+                buttonAction = .cancel
+                actionButton.setTitle(buttonAction.description, for: .normal)
+                titleLabel.text = "En Route To You"
+            }
+            
+            infoViewLabel.text = String(user.fullname.first ?? "K")
+            kornerStoreLabel.text = user.fullname
+            
+        case .driverArrived:
+            guard let user = user else { return }
+            if user.accountType == .driver {
+                titleLabel.text = "Connie Arrived!"
+//                addressLabel.text = "Please Meet Us Curbside"
+            }
+            
+        case .pickupPassenger:
+            titleLabel.text = "Connie Arrived!"
+            buttonAction = .pickUp
+            actionButton.setTitle(buttonAction.description, for: .normal)
+        
+        // MAYBE NOT?
+        case .tripInProgress:
+            guard let user = user else { return }
+            
+            if user.accountType == .driver {
+                actionButton.setTitle("KICK IT CURBSIDE", for: .normal)
+                actionButton.isEnabled = false
+            } else {
+                buttonAction = .getDirections
+                actionButton.setTitle(buttonAction.description, for: .normal)
+            }
+            
+            titleLabel.text = "Connie Arrived!"
+        
+        case .endTrip:
+            guard let user = user else { return }
+            
+            // passenger side
+            if user.accountType == .driver {
+                actionButton.setTitle("DELIVERY COMPLETE", for: .normal)
+                actionButton.isEnabled = false
+            } else {
+                buttonAction = .dropOff
+                actionButton.setTitle(buttonAction.description, for: .normal)
+            }
+            
+            titleLabel.text = "Delivery In Progress"
+        }
+    }
 }
