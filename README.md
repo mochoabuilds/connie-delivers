@@ -1,6 +1,5 @@
 ConnieDelivers.com
 
-* iOS app -- Call the corner store to your curb to mingle and shop
 * https://www.youtube.com/watch?v=OKdkQh2ox3I
 
 ## Feature List
@@ -79,19 +78,18 @@ ConnieDelivers.com
 * Ending a Visit :white_check_mark:
 * Delete Visit Once Completed :white_check_mark:
 
-* Side Menu UI
-* Menu Header UI
-* Custom Guest Init
-* Menu Options Model
-* Selecting Menu Option
-* Log-in/Sign Up Refactor
+* Side Menu UI  :white_check_mark:
+* Menu Header UI :white_check_mark:
+* Custom Guest Init :white_check_mark:
+* Menu Options Model :white_check_mark:
+* Selecting Menu Option :white_check_mark:
 
-* Settings Page UI, Populate Guest Info
+* Settings Page UI, Populate Guest Info :white_check_mark:
 
-* Configure Settings
-* Adding Saved Locations
-* Populate Table View with Search Results
-* Save Location to Database
+* Configure Settings :white_check_mark:
+* Adding Saved Locations :white_check_mark:
+* Populate Table View with Search Results :white_check_mark:
+* Save Location to Database 
 * Update Guest Object with Saved Location
 * Update Guest Object in Main Interface
 * Populate Delivery Search Tableview
