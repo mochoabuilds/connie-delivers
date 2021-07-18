@@ -1,6 +1,8 @@
-ConnieDelivers.com
+## PEDICAB APP
 
-* https://www.youtube.com/watch?v=OKdkQh2ox3I
+* Chicago Pedicab app for the city’s approximately 200 drivers.  Our iOS app matches drivers to riders (a la Uber, Lyft) with better transparency regarding pricing, standardized amenities, Etc.
+
+* https://www.youtube.com/watch?v=CaKy1NU9Hrk
 
 ## Feature List
 
