@@ -1,8 +1,10 @@
 ## PEDICAB APP
 
-* Chicago Pedicab app for the city’s approximately 200 drivers.  Our iOS app matches drivers to riders (a la Uber, Lyft) with better transparency regarding pricing, standardized amenities, Etc.
+* WHAT:  Ride-sharing app for Chicago's ~200 pedicab drivers
 
-* https://www.youtube.com/watch?v=CaKy1NU9Hrk
+* WHY: Bring transparency to pricing for riders. Better conisder the interface between technology and conservation as public opinion on pedicabs shifts.
+
+* CURRENT BUILD:  https://www.youtube.com/watch?v=CaKy1NU9Hrk
 
 ## Feature List
 
@@ -101,3 +103,7 @@
 * Adding Animation to Delivery
 * Guest Initials in Side Menu
 * Add Multiple Lanaguage Option
+
+* Deployment to TestFlight
+
+* Add additional features based on test to see what works and how it could work.
